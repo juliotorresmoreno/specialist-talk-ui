@@ -1,10 +1,69 @@
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import img from "../assets/pexels-visual-tag-mx-2566581.jpg";
+import { useState } from "react";
+import { SignUpPayload, signUp } from "../services/auth";
+import authSlice from "../features/authSlice";
+import { FetchError } from "../types/errors";
+import toast, { Toaster } from "react-hot-toast";
+import { Alert, Button } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
+import { Input } from "../components/Input";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export function SignUp() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFirstNameError("");
+    setLastNameError("");
+    setUsernameError("");
+    setEmailError("");
+    setPasswordError("");
+
+    const payload: SignUpPayload = {
+      first_name: firstName,
+      last_name: lastName,
+      username,
+      email,
+      password,
+    };
+    signUp(payload)
+      .then((session) => {
+        console.log(session);
+        dispatch(authSlice.actions.login(session));
+        navigation("/");
+      })
+      .catch((err: FetchError) => {
+        if (!err.cause) {
+          toast.error(err.message);
+          return;
+        }
+        const cause = err.cause;
+        if (cause.first_name) setFirstNameError(err.cause.first_name);
+        if (cause.last_name) setLastNameError(err.cause.last_name);
+        if (cause.username) setUsernameError(err.cause.username);
+        if (cause.email) setEmailError(err.cause.email);
+        if (cause.password) setPasswordError(err.cause.password);
+      });
+  };
+
   return (
-    <div>
+    <div className="mx-auto">
+      <Toaster />
       <NavBar />
 
       <div className="flex items-center justify-center">
@@ -21,65 +80,113 @@ export function SignUp() {
               <h1 className="text-2xl font-bold text-center mb-4">
                 Create your account
               </h1>
-              <form action="#">
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     First name
                   </label>
-                  <input
-                    className="shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  <Input
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
+                    type="text"
                   />
+                  {firstNameError && (
+                    <Alert
+                      color="failure"
+                      className="mt-2"
+                      icon={HiInformationCircle}
+                    >
+                      {firstNameError}
+                    </Alert>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Last name
                   </label>
-                  <input
-                    className="shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  <Input
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     required
+                    type="text"
                   />
+                  {lastNameError && (
+                    <Alert
+                      color="failure"
+                      className="mt-2"
+                      icon={HiInformationCircle}
+                    >
+                      {lastNameError}
+                    </Alert>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Username
+                  </label>
+                  <Input
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    type="text"
+                  />
+                  {usernameError && (
+                    <Alert
+                      color="failure"
+                      className="mt-2"
+                      icon={HiInformationCircle}
+                    >
+                      {usernameError}
+                    </Alert>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Email Address
                   </label>
-                  <input
-                    className="shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  <Input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
+                    type="email"
                   />
+                  {emailError && (
+                    <Alert
+                      color="failure"
+                      className="mt-2"
+                      icon={HiInformationCircle}
+                    >
+                      {emailError}
+                    </Alert>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Password
                   </label>
-                  <input
-                    className="shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  <Input
+                    value={password}
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                </div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="remember"
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 focus:outline-none"
-                      defaultChecked
-                    />
-                    <label
-                      htmlFor="remember"
-                      className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+                  {passwordError && (
+                    <Alert
+                      color="failure"
+                      className="mt-2"
+                      icon={HiInformationCircle}
                     >
-                      Remember me
-                    </label>
-                  </div>
+                      {passwordError}
+                    </Alert>
+                  )}
                 </div>
-                <button
+                <Button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="rounded-none w-full"
                 >
-                  Login
-                </button>
+                  Register
+                </Button>
               </form>
             </div>
           </div>

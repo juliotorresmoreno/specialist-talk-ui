@@ -1,10 +1,47 @@
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import img from "../assets/pexels-visual-tag-mx-2566581.jpg";
+import { useState } from "react";
+import { signIn } from "../services/auth";
+import { authSlice } from "../features/authSlice";
+import { FetchError } from "../types/errors";
+import toast, { Toaster } from "react-hot-toast";
+import { Alert, Button } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
+import { Input } from "../components/Input";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const payload = { email, password };
+    signIn(payload)
+      .then((session) => {
+        dispatch(authSlice.actions.login(session));
+        navigate("/");
+      })
+      .catch((err: FetchError) => {
+        if (!err.cause) {
+          toast.error(err.message);
+          return;
+        }
+        const cause = err.cause;
+        if (cause.email) setEmailError(err.cause.email);
+        if (cause.password) setPasswordError(err.cause.password);
+      });
+  };
+
   return (
-    <div>
+    <div className="mx-auto">
+      <Toaster />
       <NavBar />
 
       <div className="flex items-center justify-center">
@@ -21,24 +58,46 @@ export function SignIn() {
               <h1 className="text-2xl font-bold text-center mb-4">
                 Welcome Back!
               </h1>
-              <form action="#">
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Email Address
                   </label>
-                  <input
-                    className="shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  <Input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
+                    type="email"
                   />
+                  {emailError && (
+                    <Alert
+                      color="failure"
+                      className="mt-2"
+                      icon={HiInformationCircle}
+                    >
+                      {emailError}
+                    </Alert>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Password
                   </label>
-                  <input
-                    className="shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  <Input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
+                    type="password"
                   />
+                  {passwordError && (
+                    <Alert
+                      color="failure"
+                      className="mt-2"
+                      icon={HiInformationCircle}
+                    >
+                      {passwordError}
+                    </Alert>
+                  )}
                   <a
                     href="/recovery-password"
                     className="text-xs text-gray-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -62,12 +121,9 @@ export function SignIn() {
                     </label>
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+                <Button type="submit" className="rounded-none w-full">
                   Login
-                </button>
+                </Button>
               </form>
             </div>
           </div>

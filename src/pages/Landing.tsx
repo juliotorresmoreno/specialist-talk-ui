@@ -5,7 +5,7 @@ import { Insights } from "../components/Insights";
 
 export function Landing() {
   return (
-    <div>
+    <div className="mx-auto">
       <NavBar />
 
       <Hero />

@@ -5,7 +5,7 @@ const initialState: AuthState = {
   session: null
 };
 
-export const counterSlice = createSlice({
+export const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
@@ -18,4 +18,4 @@ export const counterSlice = createSlice({
   },
 });
 
-export default counterSlice;
+export default authSlice;

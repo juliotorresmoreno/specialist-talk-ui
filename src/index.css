@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+}
+
+.menu {
+  max-height: calc(100vh - 4.5rem);
+}

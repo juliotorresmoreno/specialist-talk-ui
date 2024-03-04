@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { User } from "../types/models";
 
 const connections: Array<User> = [];
@@ -19,8 +20,8 @@ export function Menu() {
         <ul role="list" className="divide-y divide-gray-200">
           {connections.map((connection) => (
             <li key={connection.id} className="py-3 sm:py-4 cursor-pointer">
-              <a
-                href={`/chats/${connection.id}`}
+              <Link
+                to={`/chats/${connection.id}`}
                 className="flex items-center "
               >
                 <div className="flex-shrink-0">
@@ -38,7 +39,7 @@ export function Menu() {
                     {connection.email}
                   </p>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

@@ -1,11 +1,15 @@
-const connections: Array<any> = [];
+import { User } from "../types/models";
+
+const connections: Array<User> = [];
 
 for (let i = 1; i <= 20; i++) {
   connections.push({
     id: i,
-    name: `Person ${i}`,
+    first_name: `Firstname ${i}`,
+    last_name: `Lastname ${i}`,
+    username: `person${i}`,
     email: `person${i}@example.com`,
-    image: "https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+    photo_url: "https://flowbite.com/docs/images/people/profile-picture-5.jpg",
   });
 }
 export function Menu() {
@@ -15,23 +19,26 @@ export function Menu() {
         <ul role="list" className="divide-y divide-gray-200">
           {connections.map((connection) => (
             <li key={connection.id} className="py-3 sm:py-4 cursor-pointer">
-              <div className="flex items-center ">
+              <a
+                href={`/chats/${connection.id}`}
+                className="flex items-center "
+              >
                 <div className="flex-shrink-0">
                   <img
                     className="w-8 h-8 rounded-full"
-                    src={connection.image}
-                    alt={`${connection.name} image`}
+                    src={connection.photo_url}
+                    alt={`${connection.first_name} ${connection.last_name}`}
                   />
                 </div>
                 <div className="flex-1 min-w-0 ms-4">
                   <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    {connection.name}
+                    {connection.first_name} {connection.last_name}
                   </p>
                   <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                     {connection.email}
                   </p>
                 </div>
-              </div>
+              </a>
             </li>
           ))}
         </ul>

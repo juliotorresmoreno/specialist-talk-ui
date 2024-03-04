@@ -3,11 +3,12 @@ import { Layout } from "../components/Layout";
 import { TextArea } from "../components/TextArea";
 import { useEffect, useState } from "react";
 import * as postsService from "../services/posts";
-import { Post } from "../types/models";
+import { Post } from "../components/Post";
+import * as models from "../types/models";
 
 export function Home() {
   const [post, setPost] = useState("");
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<models.Post[]>([]);
   async function getData() {
     const data = await postsService.findAll();
     setPosts(data);
@@ -42,9 +43,7 @@ export function Home() {
         </div>
         <div className="flex flex-col gap-4 px-4 py-3">
           {posts.map((post) => (
-            <div key={post.id} className="bg-white p-4 rounded-md shadow-md">
-              <p>{post.content}</p>
-            </div>
+            <Post key={post.id} {...post} />
           ))}
         </div>
       </div>

@@ -47,7 +47,7 @@ export function Post(props: PostProps) {
   };
   if (!post) return null;
   return (
-    <div key={post.id} className="bg-green-50 p-4 rounded-md shadow-md">
+    <div key={post.id} className="bg-purple-50 p-4 rounded-md shadow-md">
       <div className="flex flex-row">
         <span className="text-lg font-bold">
           {post.author.first_name} {post.author.last_name}

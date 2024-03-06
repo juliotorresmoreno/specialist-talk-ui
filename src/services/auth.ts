@@ -51,3 +51,18 @@ export async function signUp(payload: SignInPayload): Promise<Session> {
 
   return response.json();
 }
+
+export async function session(): Promise<Session> {
+  const response = await fetch("/api/auth/session", {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    throw new FetchError({
+      message: "Failed to get session",
+      cause: await response.json(),
+    });
+  }
+
+  return response.json();
+}

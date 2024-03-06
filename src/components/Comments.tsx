@@ -9,16 +9,18 @@ interface CommentsProps {
 }
 
 export function Comments(props: CommentsProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [version, setVersion] = useState(0);
   const [comments, setComments] = useState<Comment[]>([]);
   async function fetchData() {
     const data = await postsService.comments(props.postId);
     setComments(data);
+    setIsLoaded(true);
   }
-  let version: any = null;
   useEffect(() => {
-    if ((props.open && comments.length === 0) || props.version !== version) {
+    if ((props.open && !isLoaded) || props.version !== version) {
       fetchData();
-      version = props.version;
+      setVersion(props.version);
     }
   }, [props.open, props.version]);
   if (!props.open) {

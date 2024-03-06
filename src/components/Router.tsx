@@ -8,6 +8,7 @@ import { Home } from "../pages/Home";
 import { NotFound } from "../pages/NotFound";
 import { NavBar } from "./NavBar";
 import { Footer } from "./Footer";
+import { Chat } from "../pages/Chat";
 
 const NotFoundPage = () => {
   return (
@@ -33,6 +34,8 @@ export function Router() {
       ) : (
         <>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<h1>Profile</h1>} />
+          <Route path="/chats/:username" element={<Chat />} />
           <Route path="*" element={<NotFound />} />
         </>
       )}

@@ -19,10 +19,10 @@ export function Menu() {
       <div className="flow-root">
         <ul role="list" className="divide-y divide-gray-200">
           {connections.map((connection) => (
-            <li key={connection.id} className="py-3 sm:py-4 cursor-pointer">
+            <li key={connection.id} className="py-3 sm:py-4">
               <Link
-                to={`/chats/${connection.id}`}
-                className="flex items-center "
+                to={`/chats/${connection.username}`}
+                className="flex items-center cursor-pointer"
               >
                 <div className="flex-shrink-0">
                   <img

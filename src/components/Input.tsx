@@ -1,5 +1,5 @@
 const defaultClassName =
-  "shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500";
+  "shadow-sm w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500";
 
 type InputProps = {} & React.InputHTMLAttributes<HTMLInputElement>;
 

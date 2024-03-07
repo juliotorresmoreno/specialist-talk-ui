@@ -88,7 +88,7 @@ export function Insights() {
                     </svg>
                   </div>
                   <div className="mt-6 text-center relative z-10 space-y-2">
-                    <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
+                    <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-green-950 dark:text-white">
                       Secure by default
                     </h2>
                     <p className="dark:text-gray-300 text-gray-700">
@@ -185,7 +185,7 @@ export function Insights() {
                     </svg>
                   </div>
                   <div className="mt-14 text-center relative z-10 space-y-2">
-                    <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
+                    <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-green-950 dark:text-white">
                       Faster than light
                     </h2>
                     <p className="dark:text-gray-300 text-gray-700">
@@ -215,7 +215,7 @@ export function Insights() {
                       </svg>
                     </div>
                     <div className="space-y-2">
-                      <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
+                      <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-green-950 dark:text-white">
                         Faster than light
                       </h2>
                       <p className="dark:text-gray-300 text-gray-700">
@@ -299,7 +299,7 @@ export function Insights() {
                       </svg>
                     </div>
                     <div className="space-y-2">
-                      <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
+                      <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-green-950 dark:text-white">
                         Keep your loved ones safe
                       </h2>
                       <p className="dark:text-gray-300 text-gray-700">

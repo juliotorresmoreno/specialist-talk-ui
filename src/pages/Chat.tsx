@@ -13,7 +13,7 @@ export function Chat() {
 
           <div className="flex flex-row gap-2">
             <Input type="text" />
-            <Button className="rounded-none bg-purple-500">Send</Button>
+            <Button className="rounded-none bg-green-500">Send</Button>
           </div>
         </div>
       </div>

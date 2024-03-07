@@ -47,7 +47,10 @@ export function Post(props: PostProps) {
   };
   if (!post) return null;
   return (
-    <div key={post.id} className="bg-purple-50 p-4 rounded-md shadow-md">
+    <div
+      key={post.id}
+      className="flex h-full flex-col justify-center gap-2 p-6 border-2 border-slate-200 shadow-md"
+    >
       <div className="flex flex-row">
         <span className="text-lg font-bold">
           {post.author.first_name} {post.author.last_name}
@@ -59,32 +62,36 @@ export function Post(props: PostProps) {
         )
       </div>
       <p>{post.content}</p>
-      <div className="flex flex-row gap-4 mt-4">
-        <a className="flex flex-row gap-2" href="" onClick={handleComment}>
-          <span className="pt-1">
-            <FaCommentAlt />
-          </span>
-          <span>Comments ({post.comments})</span>
-        </a>
-        <a className="flex flex-row gap-2" href="" onClick={handleLike}>
-          <span className="pt-1">
-            <AiFillLike />
-          </span>
-          {post.liked ? (
-            <span className="text-red-500">Like ({post.likes})</span>
-          ) : (
-            <span>Like ({post.likes})</span>
-          )}
-        </a>
-      </div>
-      <Comments postId={post.id} open={open} version={version} />
-      <div className="flex flex-row gap-2 mt-4">
-        <Input
-          placeholder="Comment"
-          value={comment}
-          onChange={(evt) => setComment(evt.target.value)}
-          onKeyUp={handleInputKeyUp}
-        />
+      <div className="flex flex-col gap-0">
+        <div className="flex flex-row gap-4 mt-4">
+          <a className="flex flex-row gap-2" href="" onClick={handleComment}>
+            <span className="pt-1">
+              <FaCommentAlt />
+            </span>
+            <span>Comments ({post.comments})</span>
+          </a>
+          <a className="flex flex-row gap-2" href="" onClick={handleLike}>
+            <span className="pt-1">
+              <AiFillLike />
+            </span>
+            {post.liked ? (
+              <span className="text-red-500">Like ({post.likes})</span>
+            ) : (
+              <span>Like ({post.likes})</span>
+            )}
+          </a>
+        </div>
+        <div className="">
+          <Comments postId={post.id} open={open} version={version} />
+          <div className="flex flex-row gap-2 mt-4">
+            <Input
+              placeholder="Comment"
+              value={comment}
+              onChange={(evt) => setComment(evt.target.value)}
+              onKeyUp={handleInputKeyUp}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

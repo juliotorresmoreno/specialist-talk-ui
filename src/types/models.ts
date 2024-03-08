@@ -5,6 +5,10 @@ export type User = {
   username: string;
   email: string;
   photo_url: string;
+  phone?: string;
+  business?: string;
+  position_name?: string;
+  url?: string;
 };
 
 export type Session = User;
@@ -48,3 +52,14 @@ export interface Comment {
   updated_at: string;
   deleted_at: string;
 }
+
+export type Chat = {
+  id: number;
+  name: string;
+  owner_id: number;
+  owner: User;
+  code: string;
+  active: boolean;
+  creation_at: string;
+  updated_at: string;
+};

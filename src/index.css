@@ -21,3 +21,7 @@ body {
 .menu {
   max-height: calc(100vh - 4.5rem);
 }
+
+.conversation {
+  max-height: calc(100vh - 11.5rem);
+}

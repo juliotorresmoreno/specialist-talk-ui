@@ -27,7 +27,6 @@ export interface Author {
   position_name: string;
   creation_at: string;
   updated_at: string;
-  deleted_at: string;
 }
 
 export interface Post {
@@ -40,7 +39,6 @@ export interface Post {
   comments: number;
   creation_at: string;
   updated_at: string;
-  deleted_at: string;
 }
 
 export interface Comment {
@@ -50,7 +48,6 @@ export interface Comment {
   author: Author;
   creation_at: string;
   updated_at: string;
-  deleted_at: string;
 }
 
 export type Chat = {
@@ -60,6 +57,17 @@ export type Chat = {
   owner: User;
   code: string;
   active: boolean;
+  creation_at: string;
+  updated_at: string;
+};
+
+export type Message = {
+  id: number;
+  chat_id: number;
+  chat: Chat;
+  user_id: number;
+  user: User;
+  content: string;
   creation_at: string;
   updated_at: string;
 };

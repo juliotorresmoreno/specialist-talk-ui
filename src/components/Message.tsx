@@ -4,10 +4,10 @@ import { RootState } from "../store";
 
 export interface MessageProps extends models.Message {}
 
-export function Message({ id, content, user }: MessageProps) {
-  //const session = useSelector((state: RootState) => state.auth.session);
+export function Message({ content, user }: MessageProps) {
+  const session = useSelector((state: RootState) => state.auth.session);
 
-  if (id % 2 === 0) {
+  if (session?.id !== user.id) {
     return (
       <div className="flex gap-2">
         <div className="flex flex-[.7] bg-white p-2 text-justify">

@@ -10,6 +10,7 @@ import { Chat } from "../pages/Chat";
 import { Search } from "../pages/Search";
 import { Header } from "./Header";
 import { PropsWithChildren } from "react";
+import { Events } from "./Events";
 
 interface TemplateProps extends PropsWithChildren<{}> {}
 
@@ -32,24 +33,26 @@ export function Router() {
   const session = useSelector((state: RootState) => state.auth.session);
   return (
     <Template>
-      <Routes>
-        {!session ? (
-          <>
-            <Route path="/" element={<Landing />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="*" element={<NotFound />} />
-          </>
-        ) : (
-          <>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<h1>Profile</h1>} />
-            <Route path="/chats/:username" element={<Chat />} />
-            <Route path="/search/:q" element={<Search />} />
-            <Route path="*" element={<NotFound />} />
-          </>
-        )}
-      </Routes>
+      <Events>
+        <Routes>
+          {!session ? (
+            <>
+              <Route path="/" element={<Landing />} />
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="*" element={<NotFound />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/profile" element={<h1>Profile</h1>} />
+              <Route path="/chats/:username" element={<Chat />} />
+              <Route path="/search/:q" element={<Search />} />
+              <Route path="*" element={<NotFound />} />
+            </>
+          )}
+        </Routes>
+      </Events>
     </Template>
   );
 }

@@ -17,6 +17,10 @@ export type AuthState = {
   session: Session | null;
 };
 
+export type MessagesState = {
+  [key: string]: Message[];
+};
+
 export interface Author {
   id: number;
   first_name: string;

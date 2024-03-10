@@ -66,10 +66,10 @@ export function Chat() {
                 {user?.first_name} {user?.last_name}
               </div>
               <div className="flex flex-row gap-2">
-                <Button className="rounded-none bg-green-500 w-[100px]">
+                <Button className="rounded-none bg-blue-500 w-[100px]">
                   Call
                 </Button>
-                <Button className="rounded-none bg-green-500 w-[100px]">
+                <Button className="rounded-none bg-blue-500 w-[100px]">
                   VideoCall
                 </Button>
               </div>
@@ -90,7 +90,7 @@ export function Chat() {
               placeholder="Type a message"
               className="rounded-none flex-1"
             />
-            <Button className="rounded-none bg-green-500" onClick={handleSend}>
+            <Button className="rounded-none bg-blue-500" onClick={handleSend}>
               Send
             </Button>
           </div>

@@ -60,7 +60,7 @@ export function Search() {
                   <div className="flex">
                     <Button
                       as={Link}
-                      className="flex-1 rounded-none"
+                      className="flex-1 rounded-none bg-blue-500"
                       to={`/chats/${user.username}`}
                     >
                       Write

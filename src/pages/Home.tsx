@@ -35,7 +35,7 @@ export function Home() {
             <Button
               disabled={post.length < 10}
               onClick={handlePost}
-              className="rounded-none w-[100px] bg-green-500"
+              className="rounded-none w-[100px] enabled:hover:bg-blue-800 focus:ring-blue-300 focus:ring-2 bg-blue-500"
             >
               Post
             </Button>

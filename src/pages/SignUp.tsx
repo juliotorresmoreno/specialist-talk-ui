@@ -183,7 +183,7 @@ export function SignUp() {
                 </div>
                 <Button
                   type="submit"
-                  className="rounded-none w-full"
+                  className="rounded-none w-full enabled:hover:bg-blue-800 focus:ring-blue-300 focus:ring-2 bg-blue-500"
                 >
                   Register
                 </Button>

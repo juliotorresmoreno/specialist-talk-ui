@@ -19,7 +19,7 @@ function _Header() {
   };
 
   return (
-    <header className="bg-green-500">
+    <header className="bg-blue-500">
       <div className="flex flex-1">
         <div className="flex w-auto lg:w-[300px] px-4 my-3 h-10 items-center gap-4">
           <Link to="/" className="font-bold text-white ">

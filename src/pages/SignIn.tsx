@@ -121,7 +121,7 @@ export function SignIn() {
                     </label>
                   </div>
                 </div>
-                <Button type="submit" className="rounded-none w-full">
+                <Button type="submit" className="rounded-none w-full enabled:hover:bg-blue-800 focus:ring-blue-300 focus:ring-2 bg-blue-500">
                   Login
                 </Button>
               </form>

@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import authSlice from "./features/authSlice";
+import authSlice from "./features/auth";
 import messagesSlice from "./features/messages";
+import chatsSlice from "./features/chats";
 
 export const loadState = () => {
   try {
@@ -29,6 +30,7 @@ const store = configureStore({
   reducer: combineReducers({
     auth: authSlice.reducer,
     messages: messagesSlice.reducer,
+    chats: chatsSlice.reducer,
   }),
   preloadedState: persistedState,
 });

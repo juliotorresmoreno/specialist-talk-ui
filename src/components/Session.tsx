@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import * as authService from "../services/auth";
 import { useDispatch, useSelector } from "react-redux";
-import authSlice from "../features/authSlice";
+import authSlice from "../features/auth";
 import { RootState } from "../store";
 
 interface SessionProps extends PropsWithChildren<{}> {}

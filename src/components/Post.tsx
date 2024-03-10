@@ -49,7 +49,7 @@ export function Post(props: PostProps) {
   return (
     <div
       key={post.id}
-      className="flex h-full flex-col justify-center gap-2 p-6 border-2 border-slate-200 shadow-md"
+      className="flex h-full flex-col justify-center gap-2 p-6 border-2 border-slate-200"
     >
       <div className="flex flex-row">
         <span className="text-lg font-bold">

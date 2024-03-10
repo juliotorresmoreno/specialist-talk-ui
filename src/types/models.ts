@@ -17,6 +17,10 @@ export type AuthState = {
   session: Session | null;
 };
 
+export type ChatsState = {
+  items: Chat[];
+};
+
 export type MessagesState = {
   [key: string]: Message[];
 };
@@ -54,11 +58,21 @@ export interface Comment {
   updated_at: string;
 }
 
+export type ChatUser = {
+  id: number;
+  chat_id: number;
+  user_id: number;
+  user: User;
+  creation_at: string;
+  updated_at: string;
+};
+
 export type Chat = {
   id: number;
   name: string;
   owner_id: number;
   owner: User;
+  chat_users: ChatUser[];
   code: string;
   active: boolean;
   creation_at: string;

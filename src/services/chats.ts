@@ -57,14 +57,14 @@ export async function getMessages(chatId: number): Promise<Message[]> {
   return response.json();
 }
 
-export async function getChats(): Promise<Message[]> {
+export async function getChats(): Promise<Chat[]> {
   const response = await fetch(`/api/chats`, {
     method: "GET",
   });
 
   if (!response.ok) {
     throw new FetchError({
-      message: "failed to fetch chat messages",
+      message: "failed to fetch chats",
       cause: await response.json(),
     });
   }

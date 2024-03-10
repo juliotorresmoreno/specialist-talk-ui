@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "./Input";
-import authSlice from "../features/authSlice";
+import authSlice from "../features/auth";
 import { useDispatch } from "react-redux";
 import { useEffect, memo, useState, KeyboardEventHandler } from "react";
 

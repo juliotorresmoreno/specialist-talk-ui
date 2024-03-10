@@ -3,7 +3,7 @@ import { NavBar } from "../components/NavBar";
 import img from "../assets/pexels-visual-tag-mx-2566581.jpg";
 import { useState } from "react";
 import { SignUpPayload, signUp } from "../services/auth";
-import authSlice from "../features/authSlice";
+import authSlice from "../features/auth";
 import { FetchError } from "../types/errors";
 import toast, { Toaster } from "react-hot-toast";
 import { Alert, Button } from "flowbite-react";

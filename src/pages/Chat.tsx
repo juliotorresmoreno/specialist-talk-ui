@@ -18,11 +18,11 @@ export function Chat() {
   const [prompt, setPrompt] = useState<string>("");
   const [user, setUser] = useState<models.User | null>(null);
   const [chat, setChat] = useState<models.Chat | null>(null);
-  const messages = useSelector(
-    (state: RootState) => state.messages[chat?.id ?? 0] || []
-  );
+  const chatId = chat?.id ?? 0;
+  const messages = useSelector((state: RootState) => state.messages);
   async function getData() {
-    const data = await usersService.findOne(username || "");
+    if (!username) return;
+    const data = await usersService.findOne(username);
     setUser(data);
     const chat = await chatsService.create(data.id);
     setChat(chat);
@@ -31,7 +31,7 @@ export function Chat() {
   }
   useEffect(() => {
     getData();
-  }, [username || ""]);
+  }, [username]);
 
   useEffect(() => {
     if (!conversationRef.current) return;
@@ -40,7 +40,7 @@ export function Chat() {
       top: conversationRef.current.scrollHeight,
       behavior: "smooth",
     });
-  }, [messages])
+  }, [messages]);
 
   const handleSend = async () => {
     if (!chat) return;
@@ -53,8 +53,6 @@ export function Chat() {
       handleSend();
     }
   };
-
-  if (!chat) return null;
 
   return (
     <Layout>
@@ -74,8 +72,11 @@ export function Chat() {
                 </Button>
               </div>
             </div>
-            <div ref={conversationRef} className="flex flex-1 flex-col gap-2 py-2 bg-blue-50 overflow-y-auto conversation">
-              {messages.map((message) => (
+            <div
+              ref={conversationRef}
+              className="flex flex-1 flex-col gap-2 py-2 bg-blue-50 overflow-y-auto conversation"
+            >
+              {(messages[chatId] || []).map((message) => (
                 <Message key={message.id} {...message} />
               ))}
             </div>

@@ -2,9 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Input } from "./Input";
 import authSlice from "../features/auth";
 import { useDispatch } from "react-redux";
-import { useEffect, memo, useState, KeyboardEventHandler } from "react";
+import { memo, useState, KeyboardEventHandler, MouseEventHandler } from "react";
+import { Profile } from "./Profile";
 
 function _Header() {
+  const [openProfile, setOpenProfile] = useState(false);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,38 +19,50 @@ function _Header() {
     if (e.key !== "Enter") return;
     navigate(`/search/${search}`);
   };
+  const toggleProfile = () => setOpenProfile(!openProfile);
+  const handleProfile: MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault();
+    toggleProfile();
+  };
 
   return (
-    <header className="bg-blue-500">
-      <div className="flex flex-1">
-        <div className="flex w-auto lg:w-[300px] px-4 my-3 h-10 items-center gap-4">
-          <Link to="/" className="font-bold text-white ">
-            Home
-          </Link>
+    <>
+      <header className="bg-blue-500">
+        <div className="flex flex-1">
+          <div className="flex w-auto lg:w-[300px] px-4 my-3 h-10 items-center gap-4">
+            <Link to="/" className="font-bold text-white ">
+              Home
+            </Link>
+          </div>
+          <div className="flex-1 px-4 my-3 h-10 hidden md:block">
+            <Input
+              className="h-10 min-w-[400px]"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyUp={handleSearchKeyUp}
+              placeholder="Search for users"
+            />
+          </div>
+          <div className="flex flex-1 px-6 my-3 h-10 items-center justify-end gap-4">
+            <a
+              href=""
+              onClick={handleProfile}
+              className="font-bold text-white "
+            >
+              Profile
+            </a>
+            <a
+              href="javascipt: void(0)"
+              className="font-bold text-white "
+              onClick={handleLogout}
+            >
+              Logout
+            </a>
+          </div>
         </div>
-        <div className="flex-1 px-4 my-3 h-10 hidden md:block">
-          <Input
-            className="h-10 min-w-[400px]"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyUp={handleSearchKeyUp}
-            placeholder="Search for users"
-          />
-        </div>
-        <div className="flex flex-1 px-6 my-3 h-10 items-center justify-end gap-4">
-          <Link to="/profile" className="font-bold text-white ">
-            Profile
-          </Link>
-          <a
-            href="javascipt: void(0)"
-            className="font-bold text-white "
-            onClick={handleLogout}
-          >
-            Logout
-          </a>
-        </div>
-      </div>
-    </header>
+      </header>
+      <Profile open={openProfile} toggle={toggleProfile} />
+    </>
   );
 }
 

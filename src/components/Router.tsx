@@ -45,7 +45,6 @@ export function Router() {
           ) : (
             <>
               <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<h1>Profile</h1>} />
               <Route path="/chats/:username" element={<Chat />} />
               <Route path="/search/:q" element={<Search />} />
               <Route path="*" element={<NotFound />} />

@@ -25,3 +25,8 @@ body {
 .conversation {
   max-height: calc(100vh - 11.5rem);
 }
+
+div[role="dialog"] > :nth-child(1) {
+  max-height: none !important;
+  border-radius: 0 !important;
+}

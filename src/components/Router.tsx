@@ -12,6 +12,7 @@ import { Header } from "./Header";
 import { PropsWithChildren } from "react";
 import { Events } from "./Events";
 import { Menu } from "./Menu";
+import { Chats } from "../pages/Chats";
 
 interface TemplateProps extends PropsWithChildren<{}> {}
 
@@ -26,9 +27,17 @@ const Template = (props: TemplateProps) => {
         <Header />
         <main className="flex flex-1">
           <div className="flex flex-1">
-            <div className="w-[300px] bg-white border-r-2 hidden md:block">
-              <Menu />
-            </div>
+            <Routes>
+            <Route path="/chats" element={null} />
+              <Route
+                path="*"
+                element={
+                  <div className="w-[300px] bg-white border-r-2 hidden md:block">
+                    <Menu />
+                  </div>
+                }
+              />
+            </Routes>
             <div className="flex flex-1 bg-white">{props.children}</div>
           </div>
         </main>
@@ -54,6 +63,7 @@ export function Router() {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/chats/:username" element={<Chat />} />
+              <Route path="/chats" element={<Chats />} />
               <Route path="/search/:q" element={<Search />} />
               <Route path="*" element={<NotFound />} />
             </>

@@ -7,6 +7,7 @@ import { Profile } from "./Profile";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { FaHome } from "react-icons/fa";
+import { PiChatsTeardropBold } from "react-icons/pi";
 
 function _Header() {
   const [openProfile, setOpenProfile] = useState(false);
@@ -47,6 +48,9 @@ function _Header() {
             />
           </div>
           <div className="flex flex-1 px-6 my-3 h-10 items-center justify-end gap-4">
+            <Link to="/chats" className="font-bold text-white block md:hidden">
+              <PiChatsTeardropBold className="w-7 h-7" />
+            </Link>
             <a
               href=""
               onClick={handleProfile}

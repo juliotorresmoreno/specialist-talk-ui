@@ -65,7 +65,7 @@ function _Menu() {
   }, [session]);
 
   return (
-    <div className="w-full max-w-md bg-white px-2 overflow-y-auto menu">
+    <div className="w-full bg-white px-2 overflow-y-auto menu">
       <div className="flow-root">
         <ul role="list" className="divide-y divide-gray-200">
           {chats.map((chat) => {

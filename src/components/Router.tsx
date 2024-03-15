@@ -20,8 +20,8 @@ const Template = (props: TemplateProps) => {
   if (!session) return props.children;
 
   return (
-    <div className="flex flex-1 bg-blue-50 p-1">
-      <div className="flex flex-1 flex-col max-w-screen-2xl mx-auto">
+    <div className="flex flex-1 bg-blue-50">
+      <div className="flex flex-1 flex-col mx-auto">
         <Header />
         {props.children}
       </div>

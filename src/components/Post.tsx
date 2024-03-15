@@ -49,7 +49,7 @@ export function Post(props: PostProps) {
   return (
     <div
       key={post.id}
-      className="flex h-full flex-col justify-center gap-2 p-6 border-2 border-slate-200"
+      className="flex h-full flex-col justify-center gap-2 p-4 border border-blue-200"
     >
       <div className="flex flex-row">
         <span className="text-lg font-bold">
@@ -83,8 +83,9 @@ export function Post(props: PostProps) {
         </div>
         <div className="">
           <Comments postId={post.id} open={open} version={version} />
-          <div className="flex flex-row gap-2 mt-4">
+          <div className="flex flex-row gap-2 mt-2">
             <Input
+            className=""
               placeholder="Comment"
               value={comment}
               onChange={(evt) => setComment(evt.target.value)}

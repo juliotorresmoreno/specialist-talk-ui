@@ -4,6 +4,9 @@ import authSlice from "../features/auth";
 import { useDispatch } from "react-redux";
 import { memo, useState, KeyboardEventHandler, MouseEventHandler } from "react";
 import { Profile } from "./Profile";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+import { FaHome } from "react-icons/fa";
 
 function _Header() {
   const [openProfile, setOpenProfile] = useState(false);
@@ -31,10 +34,10 @@ function _Header() {
         <div className="flex flex-1">
           <div className="flex w-auto lg:w-[300px] px-4 my-3 h-10 items-center gap-4">
             <Link to="/" className="font-bold text-white ">
-              Home
+              <FaHome className="w-8 h-8" />
             </Link>
           </div>
-          <div className="flex-1 px-4 my-3 h-10 hidden md:block">
+          <div className="flex-1 my-3 h-10 hidden md:block">
             <Input
               className="h-10 min-w-[400px]"
               value={search}
@@ -49,14 +52,14 @@ function _Header() {
               onClick={handleProfile}
               className="font-bold text-white "
             >
-              Profile
+              <CgProfile className="w-7 h-7" />
             </a>
             <a
               href="javascipt: void(0)"
               className="font-bold text-white "
               onClick={handleLogout}
             >
-              Logout
+              <RiLogoutBoxLine className="w-7 h-7" />
             </a>
           </div>
         </div>

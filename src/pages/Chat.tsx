@@ -10,6 +10,9 @@ import { Message } from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import messagesSlice from "../features/messages";
 import { RootState } from "../store";
+import { IoCall } from "react-icons/io5";
+import { FaVideo } from "react-icons/fa6";
+import { IoSend } from "react-icons/io5";
 
 export function Chat() {
   const { username } = useParams();
@@ -54,27 +57,35 @@ export function Chat() {
     }
   };
 
+  if (!chat) return <div>Loading...</div>;
+
   return (
     <Layout>
       <div className="flex flex-1 flex-col w-full">
         <div className="flex flex-1 flex-col px-4 pt-3 pb-1 gap-2">
           <div className="flex flex-1 flex-col gap-2">
             <div className="flex gap-2">
-              <div className="flex-1 p-2 font-bold bg-blue-50">
+              <div className="flex-1 p-2 font-bold">
                 {user?.first_name} {user?.last_name}
               </div>
               <div className="flex flex-row gap-2">
-                <Button className="rounded-none bg-blue-500 w-[100px]">
-                  Call
+                <Button
+                  disabled={chat.chat_users.length === 1}
+                  className="rounded-none bg-green-500"
+                >
+                  <IoCall className="w-6 h-6" />
                 </Button>
-                <Button className="rounded-none bg-blue-500 w-[100px]">
-                  VideoCall
+                <Button
+                  disabled={chat.chat_users.length === 1}
+                  className="rounded-none bg-blue-500"
+                >
+                  <FaVideo className="w-6 h-6" />
                 </Button>
               </div>
             </div>
             <div
               ref={conversationRef}
-              className="flex flex-1 flex-col gap-2 py-2 bg-blue-50 overflow-y-auto conversation"
+              className="flex flex-1 flex-col gap-2 overflow-y-auto conversation"
             >
               {(messages[chatId] || []).map((message) => (
                 <Message key={message.id} {...message} />
@@ -92,7 +103,7 @@ export function Chat() {
               className="rounded-none flex-1"
             />
             <Button className="rounded-none bg-blue-500" onClick={handleSend}>
-              Send
+              <IoSend />
             </Button>
           </div>
         </div>

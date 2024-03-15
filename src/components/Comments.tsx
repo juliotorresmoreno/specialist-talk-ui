@@ -27,9 +27,9 @@ export function Comments(props: CommentsProps) {
     return null;
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2 mt-2">
       {comments.map((comment) => (
-        <div key={comment.id} className="bg-blue-50 p-4 rounded-md">
+        <div key={comment.id} className="p-2 rounded-md border">
           <div className="flex flex-row">
             <span className="text-lg font-bold">
               {comment.author.first_name} {comment.author.last_name}

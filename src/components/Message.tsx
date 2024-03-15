@@ -10,7 +10,7 @@ export function Message({ content, user }: MessageProps) {
   if (session?.id !== user.id) {
     return (
       <div className="flex gap-2">
-        <div className="flex flex-[.7] bg-white p-2 text-justify">
+        <div className="flex flex-[.7] bg-blue-100 p-2 text-justify border border-red-200">
           {content}
         </div>
       </div>
@@ -19,7 +19,7 @@ export function Message({ content, user }: MessageProps) {
 
   return (
     <div className="flex gap-2 justify-end">
-      <div className="flex flex-[.7] bg-white p-2 justify-end text-justify">
+      <div className="flex flex-[.7] p-2 justify-end text-justify border border-blue-200">
         {content}
       </div>
     </div>

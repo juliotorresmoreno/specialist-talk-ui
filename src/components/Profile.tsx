@@ -8,6 +8,7 @@ import { HiInformationCircle } from "react-icons/hi";
 import * as usersService from "../services/users";
 import { User } from "../types/models";
 import toast, { Toaster } from "react-hot-toast";
+import { TextArea } from "./TextArea";
 
 interface ProfileProps {
   open: boolean;
@@ -35,8 +36,6 @@ export function Profile(props: ProfileProps) {
 
   const [photoLoaded, setPhotoLoaded] = useState(false);
   const [photoSrc, setPhotoSrc] = useState(session?.photo_url);
-
-  console.log(session);
 
   const handlePhotoChange = (src: any) => {
     setPhotoLoaded(true);
@@ -219,6 +218,22 @@ export function Profile(props: ProfileProps) {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
+                {phoneError && (
+                  <Alert
+                    color="failure"
+                    className="mt-2"
+                    icon={HiInformationCircle}
+                  >
+                    {phoneError}
+                  </Alert>
+                )}
+              </div>
+
+              <div>
+                <div className="mb-2 block">
+                  <Label value="Bio" />
+                </div>
+                <TextArea placeholder="Your bio" rows={4} />
                 {phoneError && (
                   <Alert
                     color="failure"

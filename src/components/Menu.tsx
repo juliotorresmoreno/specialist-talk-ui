@@ -11,7 +11,6 @@ const defaultPhotoURL =
 
 function parseData(session: User, data: Chat) {
   if (data.chat_users.length === 1) {
-    console.log(data.chat_users[0].user);
     return {
       id: data.id,
       code: data.chat_users[0].user.username,

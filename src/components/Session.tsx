@@ -1,20 +1,19 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import * as authService from "../services/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import authSlice from "../features/auth";
-import { RootState } from "../store";
 
 interface SessionProps extends PropsWithChildren<{}> {}
 
 export function Session(props: SessionProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const session = useSelector((state: RootState) => state.auth.session);
   const dispatch = useDispatch();
 
   async function getData() {
     try {
-      if (!session) return;
-      await authService.session();
+      if (isLoaded) return;
+      const session = await authService.session();
+      dispatch(authSlice.actions.login(session));
     } catch (error) {
       dispatch(authSlice.actions.logout());
     } finally {

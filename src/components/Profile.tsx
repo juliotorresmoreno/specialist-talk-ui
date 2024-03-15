@@ -1,6 +1,8 @@
 import { Button, Label, Modal } from "flowbite-react";
 import { Input } from "./Input";
 import { TextArea } from "./TextArea";
+import { Photo } from "./Photo";
+import { useState } from "react";
 
 interface ProfileProps {
   open: boolean;
@@ -8,6 +10,13 @@ interface ProfileProps {
 }
 
 export function Profile(props: ProfileProps) {
+  const [photoSrc, setPhotoSrc] = useState(
+    "https://www.flowbite-react.com/images/people/profile-picture-3.jpg"
+  );
+  const handlePhotoChange = (src: any) => {
+    console.log(src);
+    setPhotoSrc(src);
+  };
   return (
     <Modal show={props.open} onClose={props.toggle}>
       <Modal.Header>Profile</Modal.Header>
@@ -15,8 +24,9 @@ export function Profile(props: ProfileProps) {
         <form>
           <div className="flex flex-row gap-4 pb-4">
             <div>
-              <img
-                src="https://www.flowbite-react.com/images/people/profile-picture-3.jpg"
+              <Photo
+                onChange={handlePhotoChange}
+                src={photoSrc}
                 alt="Profile"
                 className="w-[10.25rem] h-[10.25rem]"
               />

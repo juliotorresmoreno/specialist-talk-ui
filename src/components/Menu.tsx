@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Chat, User } from "../types/models";
 import * as chatsService from "../services/chats";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import chatsSlice from "../features/chats";
@@ -11,6 +11,7 @@ const defaultPhotoURL =
 
 function parseData(session: User, data: Chat) {
   if (data.chat_users.length === 1) {
+    console.log(data.chat_users[0].user);
     return {
       id: data.id,
       code: data.chat_users[0].user.username,
@@ -53,10 +54,12 @@ function _Menu() {
   const session = useSelector((state: RootState) => state.auth.session);
   const chats = useSelector((state: RootState) => state.chats.items);
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
   async function getData() {
-    if (chats.length > 0) return;
+    if (isLoaded) return;
     const data = await chatsService.getChats();
     dispatch(chatsSlice.actions.set(data));
+    setIsLoaded(true);
   }
   useEffect(() => {
     getData();

@@ -69,5 +69,7 @@ export async function getChats(): Promise<Chat[]> {
     });
   }
 
+  console.log("fetch chats response");
+
   return response.json();
 }

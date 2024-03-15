@@ -1,6 +1,5 @@
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
-import img from "../assets/pexels-visual-tag-mx-2566581.jpg";
 import { useState } from "react";
 import { SignUpPayload, signUp } from "../services/auth";
 import authSlice from "../features/auth";
@@ -11,6 +10,8 @@ import { HiInformationCircle } from "react-icons/hi";
 import { Input } from "../components/Input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+// @ts-ignore
+import img from "../assets/pexels-visual-tag-mx-2566581.jpg";
 
 export function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -50,6 +51,10 @@ export function SignUp() {
       .catch((err: FetchError) => {
         if (!err.cause) {
           toast.error(err.message);
+          return;
+        }
+        if (err.cause.message) {
+          toast.error(err.cause.message);
           return;
         }
         const cause = err.cause;

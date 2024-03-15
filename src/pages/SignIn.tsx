@@ -1,6 +1,5 @@
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
-import img from "../assets/pexels-visual-tag-mx-2566581.jpg";
 import { useState } from "react";
 import { signIn } from "../services/auth";
 import { authSlice } from "../features/auth";
@@ -11,6 +10,8 @@ import { HiInformationCircle } from "react-icons/hi";
 import { Input } from "../components/Input";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// @ts-ignore
+import img from "../assets/pexels-visual-tag-mx-2566581.jpg";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,10 @@ export function SignIn() {
       .catch((err: FetchError) => {
         if (!err.cause) {
           toast.error(err.message);
+          return;
+        }
+        if (err.cause.message) {
+          toast.error(err.cause.message);
           return;
         }
         const cause = err.cause;
@@ -121,7 +126,10 @@ export function SignIn() {
                     </label>
                   </div>
                 </div>
-                <Button type="submit" className="rounded-none w-full enabled:hover:bg-blue-800 focus:ring-blue-300 focus:ring-2 bg-blue-500">
+                <Button
+                  type="submit"
+                  className="rounded-none w-full enabled:hover:bg-blue-800 focus:ring-blue-300 focus:ring-2 bg-blue-500"
+                >
                   Login
                 </Button>
               </form>

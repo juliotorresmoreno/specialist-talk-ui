@@ -25,7 +25,8 @@ export function Events(props: EventsProps) {
       }
     });
 
-    eventSource.addEventListener("error", () => {
+    eventSource.addEventListener("error", (err) => {
+      console.error(err);
       eventSource.close();
       setTimeout(connect, 1000);
     });

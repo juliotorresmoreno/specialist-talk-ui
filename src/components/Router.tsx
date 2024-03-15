@@ -11,6 +11,7 @@ import { Search } from "../pages/Search";
 import { Header } from "./Header";
 import { PropsWithChildren } from "react";
 import { Events } from "./Events";
+import { Menu } from "./Menu";
 
 interface TemplateProps extends PropsWithChildren<{}> {}
 
@@ -23,7 +24,14 @@ const Template = (props: TemplateProps) => {
     <div className="flex flex-1 bg-blue-50">
       <div className="flex flex-1 flex-col mx-auto">
         <Header />
-        {props.children}
+        <main className="flex flex-1">
+          <div className="flex flex-1">
+            <div className="w-[300px] bg-white border-r-2 hidden md:block">
+              <Menu />
+            </div>
+            <div className="flex flex-1 bg-white">{props.children}</div>
+          </div>
+        </main>
       </div>
     </div>
   );

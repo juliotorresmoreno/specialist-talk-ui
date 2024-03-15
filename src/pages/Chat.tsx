@@ -57,7 +57,7 @@ export function Chat() {
     }
   };
 
-  if (!chat) return <div>Loading...</div>;
+  if (!chat) return null;
 
   return (
     <Layout>
